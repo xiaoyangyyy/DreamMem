@@ -4,7 +4,7 @@
 
 从 masked diffusion LM 的可修订去噪轨迹出发，构造候选概念，再用独立真实经历验收为可执行的离散记忆。
 
-[方法](#method) · [核心结论](#core-finding) · [结果](#results) · [快速开始](#quick-start) · [完整论文](PAPER.md) · [实验手册](docs/EXPERIMENTS.md)
+[方法](#method) · [系统架构](#system-architecture) · [核心结论](#core-finding) · [结果](#results) · [快速开始](#quick-start) · [完整论文](PAPER.md) · [实验手册](docs/EXPERIMENTS.md)
 
 ![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-183153)
 ![PyTorch](https://img.shields.io/badge/PyTorch-research-4D73E6)
@@ -23,6 +23,13 @@ DreamMem separates two operations that are easy to conflate:
 2. **Candidate acceptance:** score candidates on formation experiences and separate held-out acceptance experiences, producing an executable concept or posterior.
 
 This makes it possible to measure **candidate recall** and **exact concept recovery** independently. A true concept appearing in the candidate pool does not imply that the system will select it.
+
+<a id="system-architecture"></a>
+## System architecture
+
+![DreamMem system architecture](docs/assets/system_architecture.svg)
+
+The implementation separates backbone adapters and trajectory collection (`dcoder.py`, `nanodiff_adapter.py`, `trajectory.py`) from constructive search and evidence acceptance (`constructive.py`, `memory.py`, `evaluation.py`). Denoising post-training and policy fitting use train episodes; validation episodes select memory configurations and budgets. During offline memory formation and fresh-query testing, the backbone remains frozen and the hidden concept is not an input.
 
 <a id="core-finding"></a>
 ## Core finding
