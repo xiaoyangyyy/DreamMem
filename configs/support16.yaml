@@ -1,0 +1,59 @@
+name: support16
+task_type: concept
+device: cuda
+seeds: [17]
+data:
+  seed: 123
+  n_support: 16
+  n_queries: 4
+  near_miss_probability: 0.65
+  support_label_noise: 0.0
+model:
+  d_model: 896
+  n_layers: 24
+  n_heads: 14
+  d_ff: 4864
+  dropout: 0.0
+  max_seq_len: 512
+train:
+  seed: 17
+  steps: 800
+  batch_size: 1
+  learning_rate: 0.00001
+  weight_decay: 0.01
+  warmup_steps: 50
+  grad_accumulation: 8
+  grad_clip: 1.0
+  amp: true
+  eval_every: 50
+  eval_batches: 16
+  mask_schedule: cosine
+  min_mask_ratio: 0.05
+  concept_loss_weight: 1.0
+  query_loss_weight: 1.0
+  support_loss_weight: 1.0
+  output_dir: outputs/support16_training
+trajectory:
+  steps: 16
+  samples: 6
+  temperature: 0.7
+  revision_probability: 0.35
+  support_stages: [2, 8, 14]
+memory:
+  validation_weight: 4.0
+  complexity_penalty: 0.08
+  confidence_weight: 0.15
+  frequency_weight: 0.2
+  revision_bonus: 0.25
+  generalization_bonus: 0.1
+  formation_weight: 4.0
+  specificity_bonus: 0.02
+  generation_penalty: 0.0
+  max_candidates: 48
+eval:
+  seed: 17100
+  episodes: 256
+  batch_size: 4
+  bootstrap_samples: 1000
+  tuning_trials: 80
+  splits: [seen, unseen, compositional]

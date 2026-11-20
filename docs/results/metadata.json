@@ -1,0 +1,8 @@
+{
+  "runs": 18,
+  "rows": 208896,
+  "bootstrap_samples": 1000,
+  "bootstrap_seed": 20261118,
+  "paired_interval_note": "Episodes are resampled within each seed; seed-level estimates are equally weighted.",
+  "final": true
+}

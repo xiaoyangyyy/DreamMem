@@ -1,0 +1,58 @@
+name: composition
+device: cuda
+seeds: [17, 29, 43]
+data:
+  seed: 123
+  n_support: 8
+  n_queries: 4
+  near_miss_probability: 0.65
+  support_label_noise: 0.0
+model:
+  d_model: 256
+  n_layers: 8
+  n_heads: 8
+  d_ff: 1024
+  dropout: 0.1
+  max_seq_len: 96
+train:
+  seed: 17
+  steps: 3000
+  batch_size: 128
+  learning_rate: 0.0003
+  weight_decay: 0.01
+  warmup_steps: 200
+  grad_accumulation: 1
+  grad_clip: 1.0
+  amp: true
+  eval_every: 250
+  eval_batches: 8
+  mask_schedule: cosine
+  min_mask_ratio: 0.05
+  concept_loss_weight: 1.0
+  query_loss_weight: 1.0
+  support_loss_weight: 1.0
+  output_dir: outputs/composition
+trajectory:
+  steps: 16
+  samples: 6
+  temperature: 1.0
+  revision_probability: 0.35
+  support_stages: [2, 4, 6]
+memory:
+  validation_weight: 4.0
+  complexity_penalty: 0.08
+  confidence_weight: 0.15
+  frequency_weight: 0.2
+  revision_bonus: 0.25
+  generalization_bonus: 0.1
+  formation_weight: 4.0
+  specificity_bonus: 0.02
+  generation_penalty: 0.0
+  max_candidates: 48
+eval:
+  seed: 3100
+  episodes: 256
+  batch_size: 32
+  bootstrap_samples: 1000
+  tuning_trials: 80
+  splits: [seen, unseen, compositional]

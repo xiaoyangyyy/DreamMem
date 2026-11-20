@@ -1,0 +1,3 @@
+[submodule "vendor/nanoDiff"]
+	path = vendor/nanoDiff
+	url = https://github.com/BY571/nanoDiff.git

@@ -1,0 +1,161 @@
+{
+  "complete": true,
+  "runs": [
+    {
+      "task": "dcoder",
+      "seed": 17,
+      "splits": 3,
+      "episodes_per_split": 256,
+      "result_rows": 10752,
+      "forward_passes": 288,
+      "complete": true
+    },
+    {
+      "task": "dcoder",
+      "seed": 29,
+      "splits": 3,
+      "episodes_per_split": 256,
+      "result_rows": 10752,
+      "forward_passes": 288,
+      "complete": true
+    },
+    {
+      "task": "dcoder",
+      "seed": 43,
+      "splits": 3,
+      "episodes_per_split": 256,
+      "result_rows": 10752,
+      "forward_passes": 288,
+      "complete": true
+    },
+    {
+      "task": "relational",
+      "seed": 17,
+      "splits": 3,
+      "episodes_per_split": 256,
+      "result_rows": 10752,
+      "forward_passes": 288,
+      "complete": true
+    },
+    {
+      "task": "relational",
+      "seed": 29,
+      "splits": 3,
+      "episodes_per_split": 256,
+      "result_rows": 10752,
+      "forward_passes": 288,
+      "complete": true
+    },
+    {
+      "task": "relational",
+      "seed": 43,
+      "splits": 3,
+      "episodes_per_split": 256,
+      "result_rows": 10752,
+      "forward_passes": 288,
+      "complete": true
+    },
+    {
+      "task": "advanced",
+      "seed": 17,
+      "splits": 9,
+      "episodes_per_split": 256,
+      "result_rows": 32256,
+      "forward_passes": 288,
+      "complete": true
+    },
+    {
+      "task": "large",
+      "seed": 17,
+      "splits": 3,
+      "episodes_per_split": 256,
+      "result_rows": 10752,
+      "forward_passes": 288,
+      "complete": true
+    },
+    {
+      "task": "natural",
+      "seed": 17,
+      "splits": 3,
+      "episodes_per_split": 256,
+      "result_rows": 10752,
+      "forward_passes": 288,
+      "complete": true
+    },
+    {
+      "task": "noisy10",
+      "seed": 17,
+      "splits": 3,
+      "episodes_per_split": 256,
+      "result_rows": 10752,
+      "forward_passes": 288,
+      "complete": true
+    },
+    {
+      "task": "noisy25",
+      "seed": 17,
+      "splits": 3,
+      "episodes_per_split": 256,
+      "result_rows": 10752,
+      "forward_passes": 288,
+      "complete": true
+    },
+    {
+      "task": "support2",
+      "seed": 17,
+      "splits": 3,
+      "episodes_per_split": 256,
+      "result_rows": 10752,
+      "forward_passes": 96,
+      "complete": true
+    },
+    {
+      "task": "support4",
+      "seed": 17,
+      "splits": 3,
+      "episodes_per_split": 256,
+      "result_rows": 10752,
+      "forward_passes": 96,
+      "complete": true
+    },
+    {
+      "task": "support16",
+      "seed": 17,
+      "splits": 3,
+      "episodes_per_split": 256,
+      "result_rows": 10752,
+      "forward_passes": 288,
+      "complete": true
+    },
+    {
+      "task": "support32",
+      "seed": 17,
+      "splits": 3,
+      "episodes_per_split": 256,
+      "result_rows": 10752,
+      "forward_passes": 384,
+      "complete": true
+    },
+    {
+      "task": "nanodiff",
+      "seed": 17,
+      "splits": 3,
+      "episodes_per_split": 256,
+      "result_rows": 10752,
+      "forward_passes": 288,
+      "complete": true
+    },
+    {
+      "task": "decoder_ar",
+      "seed": 17,
+      "complete": true,
+      "forward_passes": 294
+    },
+    {
+      "task": "decoder_mlm",
+      "seed": 17,
+      "complete": true,
+      "forward_passes": 18
+    }
+  ]
+}
