@@ -46,69 +46,61 @@ def chip(ax, x, y, width, text, color=LIGHT, text_color=NAVY, fontsize=10):
 
 
 def overview(output: Path) -> None:
-    fig, ax = plt.subplots(figsize=(14, 6.5))
+    fig, ax = plt.subplots(figsize=(14, 6.7))
     ax.set_xlim(0, 14)
-    ax.set_ylim(0, 6.5)
+    ax.set_ylim(0, 6.7)
     ax.axis("off")
     fig.patch.set_facecolor("white")
-    ax.text(0.65, 6.03, "DreamMem", fontsize=25, fontweight="bold", color=NAVY, va="center")
     ax.text(
-        4.05, 6.03, "Evidence-guided constructive memory in masked diffusion LMs",
-        fontsize=15, color=NAVY, va="center",
+        0.65, 6.18, "From denoising traces to verified concepts",
+        fontsize=22, fontweight="bold", color=NAVY, va="center",
     )
     ax.text(
-        0.67, 5.57,
-        "Turn revisable denoising hypotheses into compact executable concepts — not merely more generated text.",
+        0.67, 5.74, "Candidate construction and evidence acceptance are measured separately.",
         fontsize=11.5, color=MUTED, va="center",
     )
 
-    boxes = [(0.62, 1.75), (5.16, 1.75), (9.70, 1.75)]
-    for x, y in boxes:
-        rounded(ax, x, y, 3.68, 3.45, color="white")
-    for number, (x, _), title in zip(
-        (1, 2, 3), boxes,
-        ("Revisable denoising", "Candidate construction", "Evidence acceptance"),
-    ):
-        ax.add_patch(plt.Circle((x + 0.34, 4.79), 0.20, color=BLUE))
-        ax.text(x + 0.34, 4.79, str(number), color="white", fontsize=11, fontweight="bold", ha="center", va="center")
-        ax.text(x + 0.65, 4.79, title, color=NAVY, fontsize=12.2, fontweight="bold", va="center")
+    xs = [0.62, 4.05, 7.48, 10.91]
+    labels = ["01  SUPPORT", "02  DENOISE", "03  CONSTRUCT", "04  VERIFY"]
+    titles = ["Support\nexperiences", "Revisable\ndenoising", "Construct\ncandidates", "Evidence\nacceptance"]
+    accents = [GOLD, BLUE, TEAL, NAVY]
+    for x, label, title, accent in zip(xs, labels, titles, accents):
+        rounded(ax, x, 1.72, 2.48, 3.52, color="white")
+        rounded(ax, x, 5.08, 2.48, 0.16, color=accent, edge=accent, radius=0.06, linewidth=0)
+        ax.text(x + 0.22, 4.79, label, fontsize=9.2, color=accent, fontweight="bold")
+        ax.text(
+            x + 0.22, 4.25, title, fontsize=15, color=NAVY,
+            fontweight="bold", va="center", linespacing=1.18,
+        )
 
-    ax.text(0.91, 4.30, "labeled experiences + masked concept slots", fontsize=9.5, color=MUTED)
-    for index, (text, color) in enumerate(
-        (("red    [M]    [M]", LIGHT), ("red    square    [M]", "#EEF2FF"), ("red    square    object", "#E8F7F4"))
-    ):
-        chip(ax, 0.93, 3.72 - index * 0.53, 3.04, text, color=color, fontsize=9.5)
-    ax.text(0.94, 2.00, "multiple samples • remasking • intermediate states", fontsize=9.2, color=MUTED)
+    chip(ax, 0.88, 3.20, 1.96, "object A   →   +", color=LIGHT, fontsize=9.5)
+    chip(ax, 0.88, 2.68, 1.96, "object B   →   −", color=LIGHT, fontsize=9.5)
+    ax.text(0.89, 2.08, "a few labeled examples", fontsize=9.5, color=MUTED)
 
-    ax.text(5.45, 4.30, "observed states + symbolic neighborhoods", fontsize=9.5, color=MUTED)
-    chip(ax, 5.47, 3.72, 1.29, "red", color=LIGHT, fontsize=9.5)
-    chip(ax, 6.89, 3.72, 1.60, "red ∧ square", color="#EEF2FF", fontsize=9.5)
-    chip(ax, 5.47, 3.19, 1.70, "red ∧ circle", color=LIGHT, fontsize=9.5)
-    chip(ax, 7.30, 3.19, 1.19, "blue ∧ …", color=LIGHT, fontsize=9.5)
-    ax.text(5.48, 2.65, "add  •  remove  •  substitute", fontsize=10, color=TEAL, fontweight="bold")
-    ax.text(5.48, 2.28, "merge  •  closure  •  learned proposals", fontsize=10, color=TEAL)
-    ax.text(5.48, 1.98, "construction can create concepts absent from traces", fontsize=9.2, color=MUTED)
+    for index, text in enumerate(("[M]   [M]   [M]", "red   [M]   [M]", "red   square   [M]")):
+        chip(ax, 4.31, 3.48 - index * 0.51, 1.96, text, color=LIGHT, fontsize=9.3)
+    ax.text(5.29, 2.08, "samples + remasking", fontsize=9.2, color=MUTED, ha="center")
 
-    ax.text(9.99, 4.30, "formation and acceptance experiences stay separate", fontsize=9.5, color=MUTED)
-    chip(ax, 10.02, 3.72, 3.02, "formation error + acceptance error", color=LIGHT, fontsize=9.4)
-    chip(ax, 10.02, 3.19, 3.02, "complexity + specificity + abstention", color=LIGHT, fontsize=9.4)
-    rounded(ax, 10.02, 2.19, 3.02, 0.73, color="#E8F7F4", edge="#BFE6DE", radius=0.12)
-    ax.text(11.53, 2.63, "concept = red AND square", fontsize=10.8, color=NAVY, fontweight="bold", ha="center")
-    ax.text(11.53, 2.36, "new object → executable label prediction", fontsize=9.4, color=TEAL, ha="center")
-    ax.text(10.02, 1.98, "evaluate on fresh queries after memory formation", fontsize=9.2, color=MUTED)
+    chip(ax, 7.74, 3.48, 1.96, "red", color=LIGHT, fontsize=9.5)
+    chip(ax, 7.74, 2.97, 1.96, "red ∧ square", color="#EEF2FF", fontsize=9.5)
+    chip(ax, 7.74, 2.46, 1.96, "red ∧ circle", color=LIGHT, fontsize=9.5)
+    ax.text(8.72, 2.08, "add • remove • merge", fontsize=9.0, color=MUTED, ha="center")
 
-    arrow(ax, (4.42, 3.48), (5.00, 3.48))
-    arrow(ax, (8.96, 3.48), (9.54, 3.48))
-    rounded(ax, 0.64, 0.50, 12.73, 0.78, color=NAVY, edge=NAVY, radius=0.13)
-    ax.text(
-        7.0, 0.94, "Candidate generation ≠ candidate acceptance",
-        color="white", fontsize=14, fontweight="bold", ha="center",
-    )
-    ax.text(
-        7.0, 0.68,
-        "Candidate coverage is not correctness. Real experiences determine which executable concepts survive.",
-        color="#DDE6F4", fontsize=10.3, ha="center",
-    )
+    chip(ax, 11.17, 3.48, 1.96, "held-out experiences", color=LIGHT, fontsize=9.2)
+    chip(ax, 11.17, 2.97, 1.96, "score • select • abstain", color=LIGHT, fontsize=9.2)
+    rounded(ax, 11.17, 2.04, 1.96, 0.58, color="#E8F7F4", edge="#BFE6DE", radius=0.10)
+    ax.text(12.15, 2.33, "executable concept", fontsize=9.7, color=TEAL, fontweight="bold", ha="center", va="center")
+
+    for left, right in zip(xs[:-1], xs[1:]):
+        arrow(ax, (left + 2.61, 3.45), (right - 0.13, 3.45))
+
+    rounded(ax, 0.64, 0.43, 12.73, 0.80, color=NAVY, edge=NAVY, radius=0.13)
+    ax.text(3.70, 0.96, "CANDIDATE RECALL", color="#BFD0F7", fontsize=10, fontweight="bold", ha="center")
+    ax.text(3.70, 0.67, "Did the true concept appear?", color="white", fontsize=11, ha="center")
+    ax.text(7.00, 0.83, "≠", color=GOLD, fontsize=22, fontweight="bold", ha="center", va="center")
+    ax.text(10.25, 0.96, "EXACT RECOVERY", color="#BFE6DE", fontsize=10, fontweight="bold", ha="center")
+    ax.text(10.25, 0.67, "Was the true concept selected?", color="white", fontsize=11, ha="center")
+
     svg_path = output / "method_overview.svg"
     fig.savefig(svg_path, bbox_inches="tight", facecolor="white")
     svg_path.write_text(
